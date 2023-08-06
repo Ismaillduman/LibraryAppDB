@@ -1,0 +1,1 @@
+select distinct count(id) from users;
