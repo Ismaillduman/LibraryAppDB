@@ -9,10 +9,10 @@ import org.junit.runner.RunWith;
 
         plugin = {
                 "html:target/cucumber-report.html",
-                "rerun:target/rerun.txt" ,
+                "rerun:target/rerun.txt",
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber"
         },
-        features = "src/test/resources/features" ,
+        features = "src/test/resources/features",
         glue = "com/library/steps",
         dryRun = false,
         tags = "@wip"
