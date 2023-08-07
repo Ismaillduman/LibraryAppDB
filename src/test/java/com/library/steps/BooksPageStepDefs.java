@@ -22,6 +22,9 @@ public class BooksPageStepDefs {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
     BookPage bookPage = new BookPage();
 
+    String mostPopularBookCategoryCount;
+    String actualMostPopularBookCategory;
+
     List<String> actualRealBookCategories = new ArrayList<>();
 
 
@@ -101,5 +104,22 @@ public class BooksPageStepDefs {
         Assert.assertEquals(expectedDesc,actualDescription);
 
 
+    }
+
+    @When("I execute query to find most popular book genre")
+    public void iExecuteQueryToFindMostPopularBookGenre() {
+        DB_Util.createConnection();
+        DB_Util.runQuery("select bc.name,count(*) from books b join book_categories bc on b.book_category_id = bc.id\n" +
+                "                        join book_borrow bb on b.id = bb.book_id\n" +
+                "\n" +
+                "group by name\n" +
+                "order by 2 desc;\n");
+       actualMostPopularBookCategory=DB_Util.getCellValue(1, "name");
+
+    }
+
+    @Then("verify {string} is the most popular book genre.")
+    public void verifyIsTheMostPopularBookGenre(String ExpectedBookCategory) {
+        Assert.assertEquals(ExpectedBookCategory,actualMostPopularBookCategory);
     }
 }

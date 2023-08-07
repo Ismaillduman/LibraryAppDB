@@ -1,6 +1,6 @@
 
 Feature: As a data consumer, I want UI and DB book information are match.
-@wip @editBook @db @ui
+ @editBook @db @ui
   Scenario: Verify book information with DB
     Given the "librarian" on the home page
     And the user navigates to "Books" page
