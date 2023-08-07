@@ -74,7 +74,6 @@ public class AddBookStepDefs {
 
         List<String> actualBookInfo= DB_Util.getRowDataAsList(1);
         List<String>expectedBookInfo= Arrays.asList(expected_book_name, expected_author_name);
-
 //        System.out.println("actualBookInfo = " + actualBookInfo);
 //        System.out.println("expectedBookInfo = " + expectedBookInfo);
         Assert.assertEquals(expectedBookInfo,actualBookInfo);

@@ -10,11 +10,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+
 
 public class DashBoardSteps {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
@@ -34,6 +33,7 @@ public class DashBoardSteps {
     public void theLibrarianGetsBorrowedBooksNumber() {
         BrowserUtil.waitFor(2);
         actualBorrowBooks = dashBoardPage.borrowedBooksNumber.getText();
+        System.out.println(actualBorrowBooks);
 
     }
 
