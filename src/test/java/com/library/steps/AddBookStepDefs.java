@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AddBookStepDefs {
@@ -72,9 +73,8 @@ public class AddBookStepDefs {
         DB_Util.runQuery(query);
 
         List<String> actualBookInfo= DB_Util.getRowDataAsList(1);
-        List<String>expectedBookInfo=new ArrayList<>();
-        expectedBookInfo.add(expected_book_name);
-        expectedBookInfo.add(expected_author_name);
+        List<String>expectedBookInfo= Arrays.asList(expected_book_name, expected_author_name);
+
 //        System.out.println("actualBookInfo = " + actualBookInfo);
 //        System.out.println("expectedBookInfo = " + expectedBookInfo);
         Assert.assertEquals(expectedBookInfo,actualBookInfo);
@@ -92,5 +92,6 @@ public class AddBookStepDefs {
 //        DB_Util.runQuery("select * from books where name='Head First Java'");
 //        System.out.println("DB_Util.getRowDataAsList(1) = " + DB_Util.getRowDataAsList(1));
     }
+
 
 }

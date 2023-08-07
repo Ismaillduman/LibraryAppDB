@@ -10,4 +10,12 @@ public class BorrowedBooksPage extends BasePage{
 
     @FindBy(xpath = "//tbody//td[2]")
     public List<WebElement> allBorrowedBooksName;
+
+    @FindBy(xpath = "//tbody//td[6]")
+    public List<WebElement> allBorrowBooksStatus;
+
+
+
+    @FindBy(css = ".nav-link.dropdown-toggle")
+    public WebElement userName;
 }

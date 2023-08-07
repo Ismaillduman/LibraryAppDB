@@ -35,5 +35,13 @@ select name,isbn from books where isbn;
 SELECT name from books;
 SELECT name, isbn from books;
 
+select name, books.id from books join book_borrow bb on books.id = bb.book_id
+group by id desc;
+
 SELECT  name, author FROM books ORDER BY id DESC;
+
+
+select full_name, name,returned_date from books join book_borrow bb on books.id = bb.book_id
+join users u on bb.user_id = u.id
+order by borrowed_date desc;
 
