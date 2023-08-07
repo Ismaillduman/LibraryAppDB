@@ -1,6 +1,6 @@
 package com.library.steps;
 
-import com.library.pages.BasePage;
+
 import com.library.pages.BookPage;
 import com.library.utility.BrowserUtil;
 import com.library.utility.DB_Util;
@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,8 +22,6 @@ public class BooksPageStepDefs {
 
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
     BookPage bookPage = new BookPage();
-
-    String mostPopularBookCategoryCount;
     String actualMostPopularBookCategory;
 
     List<String> actualRealBookCategories = new ArrayList<>();
@@ -73,6 +72,7 @@ public class BooksPageStepDefs {
 
     @Then("book information must match the Database")
     public void bookInformationMustMatchTheDatabase() {
+
         String actualBookName = bookPage.bookName.getAttribute("value");
         String actualIsbn = bookPage.isbn.getAttribute("value");
         String actualYear = bookPage.year.getAttribute("value");
@@ -96,12 +96,14 @@ public class BooksPageStepDefs {
         String expectedDesc = bookInfo.get("description");
 
 
+        Assert.assertEquals(expectedBookName, actualBookName);
+        Assert.assertEquals(expectedAuthorName, actualAuthor);
+        Assert.assertEquals(expectedISBN, actualIsbn);
+        Assert.assertEquals(expectedYear, actualYear);
+        Assert.assertEquals(expectedDesc, actualDescription);
 
-        Assert.assertEquals(expectedBookName,actualBookName);
-        Assert.assertEquals(expectedAuthorName,actualAuthor);
-        Assert.assertEquals(expectedISBN,actualIsbn);
-        Assert.assertEquals(expectedYear,actualYear);
-        Assert.assertEquals(expectedDesc,actualDescription);
+
+
 
 
     }
@@ -114,12 +116,12 @@ public class BooksPageStepDefs {
                 "\n" +
                 "group by name\n" +
                 "order by 2 desc;\n");
-       actualMostPopularBookCategory=DB_Util.getCellValue(1, "name");
+        actualMostPopularBookCategory = DB_Util.getCellValue(1, "name");
 
     }
 
     @Then("verify {string} is the most popular book genre.")
     public void verifyIsTheMostPopularBookGenre(String ExpectedBookCategory) {
-        Assert.assertEquals(ExpectedBookCategory,actualMostPopularBookCategory);
+        Assert.assertEquals(ExpectedBookCategory, actualMostPopularBookCategory);
     }
 }

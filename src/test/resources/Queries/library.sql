@@ -31,4 +31,9 @@ select bc.name,count(*) from books b join book_categories bc on b.book_category_
 group by name
 order by 2 desc;
 
-;
+select name,isbn from books where isbn;
+SELECT name from books;
+SELECT name, isbn from books;
+
+SELECT  name, author FROM books ORDER BY id DESC;
+
