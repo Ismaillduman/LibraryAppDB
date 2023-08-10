@@ -7,13 +7,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EditBook {
     BookPage bookPage = new BookPage();
@@ -44,30 +41,18 @@ public class EditBook {
         String actualCategory = selectedOption.getText();
 
 
+        List<String> actualBookInfo = new ArrayList<>(Arrays.asList(actualBookName, actualIsbn, actualYear, actualAuthor, actualDescription, actualCategory));
 
         DB_Util.createConnection();
         DB_Util.runQuery("SELECT  b.name , isbn, year, author, b.description,bc.name as category\n" +
                 "                FROM books b join book_categories bc on b.book_category_id = bc.id\n" +
                 "                where b.name='Son Ada';");
-        Map<String, String> bookInfo = new LinkedHashMap<>();
-
-        bookInfo = DB_Util.getRowMap(1);
 
 
-        String expectedBookName = bookInfo.get("name");
-        String expectedAuthorName = bookInfo.get("author");
-        String expectedISBN = bookInfo.get("isbn");
-        String expectedYear = bookInfo.get("year");
-        String expectedDesc = bookInfo.get("description");
-        String expectedCategory_name = bookInfo.get("category");
+        List<String> expectedBookInfo = new ArrayList<>();
+        expectedBookInfo = DB_Util.getRowDataAsList(1);
 
-
-        Assert.assertEquals(expectedBookName, actualBookName);
-        Assert.assertEquals(expectedAuthorName, actualAuthor);
-        Assert.assertEquals(expectedISBN, actualIsbn);
-        Assert.assertEquals(expectedYear, actualYear);
-        Assert.assertEquals(expectedDesc, actualDescription);
-        Assert.assertEquals(expectedCategory_name,actualCategory);
+        Assert.assertEquals(actualBookInfo, expectedBookInfo);
 
 
     }
