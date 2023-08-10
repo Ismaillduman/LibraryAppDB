@@ -355,6 +355,9 @@ public class DB_Util {
             for (int colIndex = 1; colIndex <= columnCount ; colIndex++) {
                 String columnName = rsmd.getColumnName(colIndex) ;
                 String cellValue  = rs.getString(colIndex) ;
+                if (rowMap.containsKey(columnName)) {
+                    columnName = rsmd.getColumnLabel(colIndex);; //give a different name if there is a same column name
+                }
                 rowMap.put(columnName, cellValue) ;
             }
 

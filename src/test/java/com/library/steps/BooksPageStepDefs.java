@@ -27,6 +27,7 @@ public class BooksPageStepDefs {
     List<String> actualRealBookCategories = new ArrayList<>();
 
 
+
     @When("the user navigates to {string} page")
     public void theUserNavigatesToPage(String booksPage) {
 
@@ -47,6 +48,7 @@ public class BooksPageStepDefs {
             }
         }
 
+
     }
 
     @Then("verify book categories must match book_categories table from db")
@@ -59,54 +61,7 @@ public class BooksPageStepDefs {
 
     }
 
-    @When("the user searches for {string} book")
-    public void theUserSearchesForBook(String book) {
-        bookPage.search.sendKeys(book);
-    }
 
-    @And("the user clicks edit book button")
-    public void theUserClicksEditBookButton() {
-        bookPage.editCleanCode.click();
-        BrowserUtil.waitFor(1);
-    }
-
-    @Then("book information must match the Database")
-    public void bookInformationMustMatchTheDatabase() {
-
-        String actualBookName = bookPage.bookName.getAttribute("value");
-        String actualIsbn = bookPage.isbn.getAttribute("value");
-        String actualYear = bookPage.year.getAttribute("value");
-        String actualAuthor = bookPage.author.getAttribute("value");
-        String actualDescription = bookPage.description.getAttribute("value");
-
-
-        DB_Util.createConnection();
-        DB_Util.runQuery("SELECT  b.name, isbn, year, author, b.description\n" +
-                "FROM books b \n" +
-                "where b.name='Son Ada'");
-        Map<String, String> bookInfo = new LinkedHashMap<>();
-
-        bookInfo = DB_Util.getRowMap(1);
-
-
-        String expectedBookName = bookInfo.get("name");
-        String expectedAuthorName = bookInfo.get("author");
-        String expectedISBN = bookInfo.get("isbn");
-        String expectedYear = bookInfo.get("year");
-        String expectedDesc = bookInfo.get("description");
-
-
-        Assert.assertEquals(expectedBookName, actualBookName);
-        Assert.assertEquals(expectedAuthorName, actualAuthor);
-        Assert.assertEquals(expectedISBN, actualIsbn);
-        Assert.assertEquals(expectedYear, actualYear);
-        Assert.assertEquals(expectedDesc, actualDescription);
-
-
-
-
-
-    }
 
     @When("I execute query to find most popular book genre")
     public void iExecuteQueryToFindMostPopularBookGenre() {

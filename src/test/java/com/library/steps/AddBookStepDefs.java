@@ -75,22 +75,8 @@ public class AddBookStepDefs {
         List<String> actualBookInfo= DB_Util.getRowDataAsList(1);
         List<String>expectedBookInfo= Arrays.asList(expected_book_name, expected_author_name);
 
-//        System.out.println("actualBookInfo = " + actualBookInfo);
-//        System.out.println("expectedBookInfo = " + expectedBookInfo);
         Assert.assertEquals(expectedBookInfo,actualBookInfo);
-//        for (String eachBook : bookInfo) {
-//            if(eachBook.equals(expected_book_name)&&eachBook.equals(expected_author_name)){
-//                expected_book_name=eachBook;
-//                expected_author_name=eachBook;
-//            }
-//        }
-//        System.out.println("expected_book_name = " + expected_book_name);
-//        Assert.assertNotNull(expected_book_name);
-//        Assert.assertNotNull(expected_author_name);
-//        DB_Util.destroy();
-//        DB_Util.createConnection();
-//        DB_Util.runQuery("select * from books where name='Head First Java'");
-//        System.out.println("DB_Util.getRowDataAsList(1) = " + DB_Util.getRowDataAsList(1));
+
     }
 
 

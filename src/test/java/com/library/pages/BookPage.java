@@ -43,6 +43,9 @@ public class BookPage extends BasePage {
     @FindBy(id = "book_group_id")
     public WebElement categoryDropdown;
 
+    @FindBy(xpath = "//select//option[@value='16']")
+    public WebElement sonAdaCategory;
+
 
 
     @FindBy(id = "description")
