@@ -1,6 +1,8 @@
 package com.library.steps;
 
 import com.library.pages.LoginPage;
+import com.library.pages.UsersPage;
+import com.library.utility.BrowserUtil;
 import com.library.utility.DB_Util;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,9 +10,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.List;
 
-public class UserStepDef {
+public class UserStepDef extends UsersPage {
 
 
     String actualUserCount;
@@ -58,5 +62,30 @@ public class UserStepDef {
     }
 
 
+    @When("the user selected status {string}")
+    public void theUserSelectedStatus(String active) {
 
+        BrowserUtil.selectOptionDropdown(status, active);
+        BrowserUtil.waitFor(2);
+
+    }
+
+    String userCount;
+
+    @And("the gets number of users")
+    public void theGetsNumberOfUsers() {
+        //Showing 1 to 10 of 1,022 entries
+        String[] info = allUsersInfo.getText().split(" ");
+        userCount = info[5];
+        userCount = userCount.replace(",", "");
+    }
+
+    @Then("verify {string} status users count matching with DB")
+    public void verifyStatusUsersCountMatchingWithDB(String status) {
+        DB_Util.createConnection();
+        DB_Util.runQuery("select status, count(*) from users\n" +
+                "where status='"+status+"'");
+        String expectedCount = DB_Util.getCellValue(1,2);
+        Assert.assertEquals(expectedCount,userCount);
+    }
 }

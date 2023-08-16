@@ -47,3 +47,6 @@ select full_name, name,returned_date from books join book_borrow bb on books.id 
 join users u on bb.user_id = u.id
 order by borrowed_date desc;
 
+select status, count(*) from users
+where status='INACTIVE';
+
