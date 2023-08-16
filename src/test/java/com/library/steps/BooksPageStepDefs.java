@@ -32,7 +32,7 @@ public class BooksPageStepDefs {
     public void theUserNavigatesToPage(String booksPage) {
 
         bookPage.navigateModule(booksPage);
-        wait.until(ExpectedConditions.elementToBeClickable(bookPage.mainCategoryElement));
+        //wait.until(ExpectedConditions.elementToBeClickable(bookPage.mainCategoryElement));
 
     }
 
