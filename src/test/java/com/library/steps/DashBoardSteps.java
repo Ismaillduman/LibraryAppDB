@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DashBoardSteps {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
     LoginPage loginPage = new LoginPage();
+
+    String bookName=null;
     DashBoardPage dashBoardPage = new DashBoardPage();
     String actualBorrowBooks;
 
@@ -42,7 +44,7 @@ public class DashBoardSteps {
         DB_Util.runQuery("select count(id) from book_borrow where is_returned=0;");
         String expectedBorrowBooks=DB_Util.getFirstRowFirstColumn();
 
-        Assert.assertEquals("data is not match each other",expectedBorrowBooks,actualBorrowBooks);
+        Assert.assertEquals("data does not match each other",expectedBorrowBooks,actualBorrowBooks);
 
 
     }
